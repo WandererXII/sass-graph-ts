@@ -8,4 +8,5 @@ jobs:
       - uses: actions/setup-node@v4
       - run: npm install --foreground-scripts
       - run: npm run lint
+      - run: npm run build
       - run: npm run test
