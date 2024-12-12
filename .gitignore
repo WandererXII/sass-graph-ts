@@ -6,3 +6,5 @@ test.js
 *.swp
 package-lock.json
 
+dist
+tsconfig.tsbuildinfo

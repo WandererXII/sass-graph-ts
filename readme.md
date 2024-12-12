@@ -1,36 +1,38 @@
-# Sass Graph
+# Sass-graph-ts
 
-Parses Sass files in a directory and exposes a graph of dependencies
+Fork of (https://github.com/xzyfer/sass-graph)[https://github.com/xzyfer/sass-graph]
 
-[![Build Status](https://travis-ci.org/xzyfer/sass-graph.svg?branch=master)](https://travis-ci.org/xzyfer/sass-graph)
-[![Coverage Status](https://coveralls.io/repos/github/xzyfer/sass-graph/badge.svg?branch=master)](https://coveralls.io/github/xzyfer/sass-graph?branch=master)
-[![npm version](https://badge.fury.io/js/sass-graph.svg)](http://badge.fury.io/js/sass-graph)
-[![Dependency Status](https://david-dm.org/xzyfer/sass-graph.svg?theme=shields.io)](https://david-dm.org/xzyfer/sass-graph)
-[![devDependency Status](https://david-dm.org/xzyfer/sass-graph/dev-status.svg?theme=shields.io)](https://david-dm.org/xzyfer/sass-graph#info=devDependencies)
+Parses Sass files in a directory and exposes a graph of dependencies.
+Rewritten in TypeScript, with updated dependencies and support for `@use` and `@forward`.
+
+[![Test](https://github.com/WandererXII/sass-graph-ts/workflows/Test/badge.svg)](https://github.com/WandererXII/sass-graph-ts/actions)
+[![npm](https://img.shields.io/npm/v/sass-graph-ts)](https://www.npmjs.com/package/sass-graph-ts)
 
 ## Install
 
-Install with [npm](https://npmjs.org/package/sass-graph)
-
-```
-npm install --save-dev sass-graph
+```sh
+npm install --save-dev sass-graph-ts
 ```
 
 ## Usage
 
 Usage as a Node library:
 
-```js
-var sassGraph = require('./sass-graph');
+```ts
+import { SassGraph } from 'sass-graph-ts';
+
+const graph: SassGraph = SassGraph.parseDir('/home/username/project/styles', {
+  extensions: ['scss'],
+});
 ```
 
 Usage as a command line tool:
 
 The command line tool will parse a graph and then either display ancestors, descendents or both.
 
-```
-$ ./bin/sassgraph --help
-Usage: bin/sassgraph <command> [options] <dir> [file]
+```sh
+$ ./bin/sass-graph --help
+Usage: bin/sass-graph <command> [options] <dir> [file]
 
 Commands:
   ancestors    Output the ancestors
@@ -44,7 +46,7 @@ Options:
   -v, --version     Show version number
 
 Examples:
-  ./bin/sassgraph descendents test/fixtures test/fixtures/a.scss
+  ./bin/sass-graph descendents test/fixtures test/fixtures/a.scss
   /path/to/test/fixtures/b.scss
   /path/to/test/fixtures/_c.scss
 ```
@@ -91,9 +93,10 @@ Exclude files matching regular expression.
 
 ## Example
 
-```js
-var sassGraph = require('./sass-graph');
-console.log(sassGraph.parseDir('test/fixtures'));
+```ts
+import { SassGraph } from 'sass-graph-ts';
+
+console.log(SassGraph.parseDir('test/fixtures'));
 
 //{ index: {,
 //    '/path/to/test/fixtures/a.scss': {
@@ -123,7 +126,7 @@ npm test
 ## Authors
 
 Sass graph was originally written by [Lachlan Donald](http://lachlan.me).
-It is now maintained by [Michael Mifsud](http://twitter.com/xzyfer).
+It is now maintained by [Michael Mifsud](http://twitter.com/xzyfer). TS rewrite by WandererXII.
 
 ## License
 
