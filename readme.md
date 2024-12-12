@@ -1,12 +1,12 @@
 # Sass-graph-ts
 
-Fork of (https://github.com/xzyfer/sass-graph)[https://github.com/xzyfer/sass-graph]
-
-Parses Sass files in a directory and exposes a graph of dependencies.
-Rewritten in TypeScript, with updated dependencies and support for `@use` and `@forward`.
-
 [![Test](https://github.com/WandererXII/sass-graph-ts/workflows/Test/badge.svg)](https://github.com/WandererXII/sass-graph-ts/actions)
 [![npm](https://img.shields.io/npm/v/sass-graph-ts)](https://www.npmjs.com/package/sass-graph-ts)
+
+Fork of (https://github.com/xzyfer/sass-graph)[https://github.com/xzyfer/sass-graph].
+Rewritten in TypeScript, with updated dependencies and support for `@use` and `@forward`.
+
+Parses Sass files in a directory and exposes a graph of dependencies.
 
 ## Install
 
@@ -28,28 +28,9 @@ const graph: SassGraph = SassGraph.parseDir('/home/username/project/styles', {
 
 Usage as a command line tool:
 
-The command line tool will parse a graph and then either display ancestors, descendents or both.
+The command line tool will parse a graph and then either display ancestors, descendents or the whole index.
 
-```sh
-$ ./bin/sass-graph --help
-Usage: bin/sass-graph <command> [options] <dir> [file]
-
-Commands:
-  ancestors    Output the ancestors
-  descendents  Output the descendents
-
-Options:
-  -I, --load-path   Add directories to the sass load path
-  -e, --extensions  File extensions to include in the graph
-  -j, --json        Output the index in json
-  -h, --help        Show help
-  -v, --version     Show version number
-
-Examples:
-  ./bin/sass-graph descendents test/fixtures test/fixtures/a.scss
-  /path/to/test/fixtures/b.scss
-  /path/to/test/fixtures/_c.scss
-```
+Run `sass-graph --help` for more details.
 
 ## API
 
