@@ -3,7 +3,7 @@
 [![Test](https://github.com/WandererXII/sass-graph-ts/workflows/Test/badge.svg)](https://github.com/WandererXII/sass-graph-ts/actions)
 [![npm](https://img.shields.io/npm/v/sass-graph-ts)](https://www.npmjs.com/package/sass-graph-ts)
 
-Fork of (https://github.com/xzyfer/sass-graph)[https://github.com/xzyfer/sass-graph].
+Fork of https://github.com/xzyfer/sass-graph.
 Rewritten in TypeScript, with updated dependencies and support for `@use` and `@forward`.
 
 Parses Sass files in a directory and exposes a graph of dependencies.
