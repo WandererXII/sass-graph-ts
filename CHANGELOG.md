@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.1.0]
+
+Added option to pass in custom resolver for import/use/forward. Use case would be for monorepos with some sort of path aliasing.
+
 ## [5.0.0]
 
 ### BREAKING CHANGES

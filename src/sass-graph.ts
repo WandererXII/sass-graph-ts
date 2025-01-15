@@ -34,6 +34,7 @@ export class SassGraph {
   public exclude: RegExp | null;
   public follow: boolean;
   public loadPaths: string[];
+  public customResolver: ((importPath: string) => string | false) | undefined;
 
   public index: Record<string, SassGraphIndexEntry> = {};
 
@@ -62,6 +63,7 @@ export class SassGraph {
     this.exclude = options.exclude;
     this.follow = options.follow;
     this.loadPaths = (options.loadPaths || []).map((p) => path.resolve(p));
+    this.customResolver = options.resolver;
 
     if (dir) {
       const files = fg.sync(
@@ -95,9 +97,13 @@ export class SassGraph {
 
     for (const importPath of imports) {
       const loadPaths = [cwd, this.dir, ...this.loadPaths]
-          .filter((p): p is string => !!p)
-          .filter((item, index, self) => self.indexOf(item) === index),
-        resolved = resolveSassPath(importPath, loadPaths, this.extensions);
+        .filter((p): p is string => !!p)
+        .filter((item, index, self) => self.indexOf(item) === index);
+
+      let resolved: string | false = false;
+      if (this.customResolver) resolved = this.customResolver(importPath);
+      if (!resolved) resolved = resolveSassPath(importPath, loadPaths, this.extensions);
+
       if (!resolved || this.exclude?.test(resolved)) continue;
 
       if (!entry.imports.includes(resolved)) {

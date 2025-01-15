@@ -3,6 +3,7 @@ export interface SassGraphOptions {
   exclude: RegExp | null;
   follow: boolean;
   loadPaths: string[];
+  resolver?: (importPath: string) => string | false;
 }
 
 export interface SassGraphIndexEntry {

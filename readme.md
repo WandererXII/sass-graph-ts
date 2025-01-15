@@ -72,6 +72,13 @@ Default: `undefined`
 
 Exclude files matching regular expression.
 
+#### resolver
+
+Type: `(string) => string | false;`
+Default: `undefined`
+
+Custom resolver for imports, return `false` to run default resolver. Might be useful for custom imports, or `pkg:` scheme.
+
 ## Example
 
 ```ts
