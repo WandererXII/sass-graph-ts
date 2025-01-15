@@ -6,6 +6,8 @@ export function parseImports(content: string, isIndentedSyntax = false): string[
   let results: string[] = [],
     tmp = '',
     inImport = false,
+    isModern = false,
+    inAsWith = false,
     inParen = false,
     prevToken = tokens[0];
 
@@ -23,8 +25,10 @@ export function parseImports(content: string, isIndentedSyntax = false): string[
       }
 
       inImport = true;
+      isModern = token[1] === 'use' || token[1] === 'forward';
     } else if (inImport && !inParen && (token[0] === 'ident' || token[0] === '/')) {
-      tmp += token[1];
+      if (isModern && (token[1] === 'as' || token[1] === 'with')) inAsWith = true;
+      else if (!inAsWith) tmp += token[1];
     } else if (inImport && !inParen && (token[0] === 'space' || token[0] === 'newline')) {
       if (tmp !== '') {
         results.push(tmp);
@@ -32,10 +36,14 @@ export function parseImports(content: string, isIndentedSyntax = false): string[
 
         if (isIndentedSyntax) {
           inImport = false;
+          isModern = false;
+          inAsWith = false;
         }
       }
     } else if (inImport && token[0] === ';') {
       inImport = false;
+      isModern = false;
+      inAsWith = false;
 
       if (tmp !== '') {
         results.push(tmp);
